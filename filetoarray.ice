@@ -10,7 +10,7 @@ def program
     size %file len
 
     set i 0
-    idef readline
+    def readline
         if $i < $len
             frseek %file $i line
             insert lines $line
