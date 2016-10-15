@@ -1,0 +1,118 @@
+Type definitions:
+  $ = Variable
+  @ = Struct
+  # = Field
+  & = Instance
+  % = Pointer
+  * = Label (Int)
+
+"#" is a comment line.
+
+Program:
+  exit
+  Quit the program
+
+Timing:
+  wait [$ #]a
+  Waits for "A" milliseconds before continuing code execution
+
+Data:
+  set a [$ #]b
+  Set the value of "A" to "B"
+
+  insert a [a, b, c, d...]
+  Insert all the passed arguments into the array "A"
+
+  bit a [! + - * / & | ~ << >>] [$ #]b
+  Performs the selected operation with "A" and "B"
+
+  push a
+  Put "A", on top of the stack
+
+  pop [a]
+  Retrieve the top item of the stack and put in "A" or discard it
+
+  read a
+  Retrieve the top item of the stack and put in "A", leaving the stack untouched
+
+Conditions:
+  if, elif, else, endif
+
+Jump:
+  Using "call" for loops will slow your code down and may cause problems, use "jump instead".
+
+  def a
+  Set label "A" to it's execution point
+
+  call/jump [$]A
+  Jump to label "A"
+
+  return
+  Jump back from a call
+
+Struct:
+  struct a
+  Create the struct "A" and set it as the working struct
+
+  delete @a
+  Delete the struct "A"
+
+  field b type
+  Add a field "B" to the working struct with data type "TYPE"
+
+  set a @b
+  Set "A" to a new instance of "B"
+
+  with &a
+  Next instructions will use the instance "A"
+
+  end
+  Stop using the working struct/instance
+
+  set #a b
+  Set the value of the current instance's field "A" to "B"
+
+  set a #b
+  Set "A" to the value of the current instance's field "B"
+
+  push @a
+  Push all instances of struct "A" to the stack
+
+Pointer:
+  set a %b
+  Set "A" to a pointer of the class "B"
+
+  File:
+    push %a
+    Push every line of the file data stored in the pointer "A" to the stack
+
+    fread %a [$ #]b
+    Read the file "B" and store it's data in the pointer "A" (<PointerOf File>)
+
+    frseek %a [$ #]b [$ #]c
+    Store the line number "B" from file pointer "A" into variable "C"
+
+    fwrite %a [$ #]b
+    Write the value of "B" on the file opened in "A"
+
+    fwseek %a [$ #]b [$ #]c
+    Write the value of "C" on the line number "B" of the file opened in "A"
+
+    fclose %a
+    Close the file opened in "%a" and delete the pointer (%a).
+
+    size %a [$ #]b
+
+Array:
+  seek [$ #]a [$ #]b c
+  Store the value of index "B" stored in the array "A" into variable "C"
+
+  size [$ #]a [$ #]b
+  Store the length of the array "A" into variable "B"
+
+Input/Output:
+  input [$ #]a type
+  Create the variable "A" of type "TYPE", prompt input from the user and store it there
+
+  print [a, b, c, d...]
+  Print the value of all passed arguments to the screen, or a new line if no arguments are passed
