@@ -703,7 +703,7 @@ with open(sys.argv[1]) as f:
             dataType = ParseFlag(args[1], False)[1]
 
             # Function code
-            if nameFlag in ["$", "@", "*", "&", "%"] or any(not char.isalpha() for char in varName):
+            if nameFlag in ["$", "@", "*", "&", "%"] or any(not char.isalpha() for char in varName[1:]):
                 Throw("Invalid variable name \""+ varName +"\".")
 
             if dataFlag == "&":
@@ -726,6 +726,7 @@ with open(sys.argv[1]) as f:
                     instances[varName]["fields"][field] = {}
                     instances[varName]["fields"][field]["data"] = None
                     instances[varName]["fields"][field]["type"] = types[varData]["fields"][field]["type"]
+                    instances[varName]["fields"][field]["protected"] = False
 
                 current = varName
             elif nameFlag == "#": # Set field
